@@ -1,0 +1,43 @@
+#!/bin/sh
+
+### yweather Geektool script
+cd /Users/marburgerj/bin/yweather-dir/
+
+# colors
+txtrst=$(tput sgr0) # Reset
+txtred=$(tput setaf 1) # Red
+txtblue=$(tput setaf 6) # Blue
+txtwht=$(tput setaf 7) # White
+
+# get_data
+if [ -z "$1" ]
+then
+	echo "Usage: yweather [fhl1|fhl2|fd1|fd2] or -[any yweather.pl arg]"
+elif [ $1 == "fhl2" ]
+then
+	tom_high=$(./yweather.pl -fh2)
+	tom_low=$(./yweather.pl -fl2)
+	echo "${txtred}H:${txtwht} $tom_high\xc2\xb0F"
+	echo "${txtblue}L:${txtwht} $tom_low\xc2\xb0F"
+elif [ $1 == "fhl1" ]
+then
+	tod_high=$(./yweather.pl -fh1)
+	tod_low=$(./yweather.pl -fl1)
+	echo "${txtred}H:${txtwht} $tod_high\xc2\xb0F"
+	echo "${txtblue}L:${txtwht} $tod_low\xc2\xb0F"
+elif [ $1 == "fd2" ]
+then
+	echo $(./yweather.pl -ft2)
+elif [ $1 == "fd1" ]
+then
+	echo $(./yweather.pl -ft1)
+else
+	if [ -z "$2" ]
+	then
+		echo $(./yweather.pl $1)
+	else
+		echo $2 $(./yweather.pl $1)
+	fi
+fi
+
+exit 1

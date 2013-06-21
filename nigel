@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+### CONFIG
+### What nigel should call you (optional)
+name=""
+### [Alex|Vicki]
+voice="Alex"
+### END
+
+h=`date +%H`
+if [ $h -lt 12 ]; then
+  time_of_day="morning"
+elif [ $h -lt 18 ]; then
+  time_of_day="afternoon"
+else
+  time_of_day="evening"
+fi
+good_greeting="Good $time_of_day, $name."
+say -v $voice $good_greeting
+echo $good_greeting
+
+### Current time
+current_time="The current time is $(date '+%I:%M %p')."
+say -v $voice $current_time
+echo $current_time
+
+### Today's date
+current_date="Today's date is $(date +%A" "%d" "%B)."
+say -v $voice $current_date
+echo $current_date
+
+### Weather
+todays_weather="The current weather in $(yweather -lc), $(yweather -lr) is $(curl --silent "http://xml.weather.yahoo.com/forecastrss?p=USDC0001&u=f" | grep -E '(Current Conditions:|F<BR)' | sed -e 's/Current Conditions://' -e 's/<br \/>//' -e 's/<b>//' -e 's/<\/b>//' -e 's/<BR \/>//' -e 's///' -e 's/<\/description>//')."
+say -v $voice $todays_weather
+echo $todays_weather
+
+todayshigh="$(yweather -fh1)"
+todayslow="$(yweather -fl1)"
+todays_forecast="Today's high is $todayshigh degrees and today's low is $todayslow degrees."
+say -v $voice $todays_forecast
+echo $todays_forecast
+
+### Immediate next event, first event
+###say -v $voice "$(icalbuddy -f eventsFrom:'june 20, 2013' to:'june 20, 2013 at 9am')"
+
+### Check battery power
+battery_power="$(bash /usr/local/bin/battery)"
+if [ $battery_power -lt 20 ]; then
+	say -v $voice "Battery power is currently $battery_power percent."
+elif [ $battery_power -lt 10 ]; then
+	say -v $voice "Battery power is dangerously low at $battery_power percent."
+else
+	say -v $voice "Battery power is optimal at $battery_power percent."
+fi
+
+sleep 1
+
+### Unread emails
+inbox_count="You have $(/usr/local/bin/inbox-count -u) unread emails."
+say -v $voice $inbox_count
+echo $inbox_count
+
+### If Cas is out of town
+###cas_location="Detroit"
+###say -v $voice "Cas is in $cas_location. Shall I text you a Chinese delivery service?"
+
+clear
+exit 1

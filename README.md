@@ -4,8 +4,7 @@ nigel
 A simple collection of shell scripts that speak information to you on Mac OS X. Think IronMan's Jarvis in super alpha without the cool Minority Report stuff.
 
 ### By Joey Marburger
-### http://joseph-jam.es/nigel
-### 06/21/2013
+### https://github.com/joeymarburger/nigel
 ### v1.0 beta
 
 [REQUIREMENTS]
@@ -22,3 +21,12 @@ Type 'nigel' without the single quotes and press enter.
 
 Step 3
 There is no step three.
+
+Thank you to danl@loud-soft.com for the yweather package
+#################################################################
+# Yahoo Weather Rss Information Atomizer
+# Version 0.7.7
+# Loud-Soft.com
+# danl@loud-soft.com 
+# Provided As Is
+#################################################################

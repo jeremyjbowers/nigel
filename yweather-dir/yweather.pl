@@ -19,9 +19,11 @@ use File::Copy;
 # Variables
 #################################################################
 # Constants (Change these to localize)
+# 20071 is Washington, DC. 
+# Change to your zipcode for your weather
 my $zipcode = "20071";
 my $unit = "F";
-my $scripthome = "/Users/marburgerj/bin/yweather-dir/";
+my $scripthome = "/path/to/bin/yweather-dir/";
 my $icondir = $scripthome."images/";
 my $datadir = $scripthome."data/";
 my $datafile = $datadir."weather.xml";
